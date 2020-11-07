@@ -1,0 +1,25 @@
+version: 0.2
+
+phases: 
+    install:
+        runtime-versions:
+            nodejs: 10
+        commands:
+            - echo "Install phase...."
+    pre_build:
+        commands: 
+            - echo "Pre-build phase...."
+    build:
+        commands:
+            - echo "Build phase...."
+            - echo "Testing the artifact...."
+            - grep -Fq "Technical" index.html
+    post_build:
+        commands:
+            - echo "Post build phase...."
+            
+artifacts:
+    files:
+        - index.html
+        - appspec.yml
+        - scripts/*
