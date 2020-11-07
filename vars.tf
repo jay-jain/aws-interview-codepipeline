@@ -1,5 +1,3 @@
-variable "s3_bucket_name" {
-  type    = list
-  default = ["dev-artifacts-aws-interview-jjain", "test-artifacts-aws-interview-jjain", "prod-artifacts-aws-interview-jjain"]
+variable "artifact_bucket_name"{
+    description ="The globally unique name of the S3 bucket that will store your CodePipeline artifacts. This name MUST be unique."
 }
-

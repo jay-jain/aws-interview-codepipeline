@@ -82,3 +82,9 @@ data "aws_iam_policy_document" "ec2-s3-policy" {
   }
   
 }
+
+resource "aws_iam_role_policy" "ec2-s3-policy-role" {
+  name   = "ec2-s3-role-policy"
+  role   = aws_iam_role.ec2-s3-role.id
+  policy = data.aws_iam_policy_document.ec2-s3-policy.json
+}

@@ -30,10 +30,7 @@ resource "aws_iam_role_policy" "web-app-codebuild-policy" {
   "Statement": [
    {
         "Effect": "Allow",
-        "Resource": [
-            "arn:aws:logs:us-east-1:${data.aws_caller_identity.current.account_id}:log-group:/aws/codebuild/${aws_codebuild_project.web_application_build.name}",
-            "arn:aws:logs:us-east-1:${data.aws_caller_identity.current.account_id}:log-group:/aws/codebuild/${aws_codebuild_project.web_application_build.name}:*"
-        ],
+        "Resource": ["*"],
         "Action": [
             "logs:CreateLogGroup",
             "logs:CreateLogStream",
@@ -47,7 +44,7 @@ resource "aws_iam_role_policy" "web-app-codebuild-policy" {
         "codecommit:GitPull"
       ],
       "Resource": [
-        "arn:aws:codecommit:us-east-1:${data.aws_caller_identity.current.account_id}:web-app"
+        "arn:aws:codecommit:us-east-1::${data.aws_caller_identity.current.account_id}:web-app"
       ]
     },
     {

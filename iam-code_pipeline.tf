@@ -50,7 +50,7 @@ data "aws_iam_policy_document" "web-app-codepipeline-role-policy" {
       "sts:AssumeRole",
     ]
     resources = [
-      "arn:aws:iam:${data.aws_caller_identity.current.account_id}:role/web-app-codepipeline-role"
+      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/web-app-codepipeline-role"
     ]
   }
 
@@ -93,7 +93,7 @@ data "aws_iam_policy_document" "web-app-codepipeline-role-policy" {
   }
 }
 
-resource "aws_iam_role_policy" "demo-codepipeline" {
+resource "aws_iam_role_policy" "web-app-codepipeline-role-policy" {
   name   = "web-app-codepipeline-policy"
   role   = aws_iam_role.web-app-codepipeline-role.id
   policy = data.aws_iam_policy_document.web-app-codepipeline-role-policy.json

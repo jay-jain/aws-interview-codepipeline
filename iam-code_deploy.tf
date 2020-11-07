@@ -1,5 +1,5 @@
 resource "aws_iam_role" "web-app-codedeploy-role" {
-  name = "demo-codedeploy"
+  name = "web-app-codedeploy-role"
 
   assume_role_policy = <<EOF
 {
@@ -43,7 +43,7 @@ data "aws_iam_policy_document" "web-app-codedeploy-role-policy" {
   
 }
 
-resource "aws_iam_role_policy" "demo-codedeploy" {
+resource "aws_iam_role_policy" "web-codedeploy-role-policy" {
   name   = "codedeploy-policy"
   role   = aws_iam_role.web-app-codedeploy-role.id
   policy = data.aws_iam_policy_document.web-app-codedeploy-role-policy.json

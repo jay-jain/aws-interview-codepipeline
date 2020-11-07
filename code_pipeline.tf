@@ -50,11 +50,10 @@ resource "aws_codepipeline" "codepipeline" {
 
     action {
       name             = "DeployToEC2"
-      category         = "Build"
+      category         = "Deploy"
       owner            = "AWS"
       provider         = "CodeDeploy"
-      input_artifacts  = ["SourceZIP"]
-      output_artifacts = ["BuildZIP"]
+      input_artifacts  = ["BuildZIP"]
       version          = "1"
 
       configuration = {

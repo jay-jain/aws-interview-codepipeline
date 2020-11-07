@@ -1,7 +1,6 @@
-# Artifact Bucket for dev,test, and prod environments
+
 resource "aws_s3_bucket" "artifact_buckets" {
-  #count         = length(var.s3_bucket_name)
-  bucket        = "artifacts-aws-interview-jjain" #var.s3_bucket_name[count.index]
+  bucket        = var.artifact_bucket_name
   acl           = "private"
   force_destroy = "true"
   server_side_encryption_configuration {
