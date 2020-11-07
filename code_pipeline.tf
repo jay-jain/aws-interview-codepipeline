@@ -11,7 +11,7 @@ resource "aws_codepipeline" "codepipeline" {
     name = "Source"
 
     action {
-      name             = "Source"
+      name             = "SourceAction"
       category         = "Source"
       owner            = "AWS"
       provider         = "CodeCommit"
@@ -30,30 +30,36 @@ resource "aws_codepipeline" "codepipeline" {
     name = "Build"
 
     action {
-      name      = "Approval"
-      category  = "Approval"
-      owner     = "AWS"
-      provider  = "Manual"
-      version   = "1"
-      run_order = "1"
-      configuration = {
-        NotificationArn = aws_sns_topic.new_ami.arn
-        CustomData      = "Approve the Packer AMI build! Double check that it'll work!"
-      }
-    }
-
-    action {
-      name             = "Build"
+      name             = "BuildWebPage"
       category         = "Build"
       owner            = "AWS"
       provider         = "CodeBuild"
       input_artifacts  = ["SourceZIP"]
       output_artifacts = ["BuildZIP"]
       version          = "1"
-      run_order        = "2"
+
 
       configuration = {
         ProjectName = aws_codebuild_project.web_application_build.name
+      }
+    }
+  }
+
+  stage {
+    name = "Deploy"
+
+    action {
+      name             = "DeployToEC2"
+      category         = "Build"
+      owner            = "AWS"
+      provider         = "CodeDeploy"
+      input_artifacts  = ["SourceZIP"]
+      output_artifacts = ["BuildZIP"]
+      version          = "1"
+
+      configuration = {
+        ApplicationName                = aws_codedeploy_app.web-app.name
+        DeploymentGroupName            = aws_codedeploy_deployment_group.web-app-deployment-group.deployment_group_name
       }
     }
   }
