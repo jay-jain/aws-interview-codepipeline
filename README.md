@@ -11,6 +11,8 @@ This repository uses Terraform to create the following components:
 The Terraform code outputs:
 * The public IP of the EC2 instance
 * The HTTPS clone URL of the CodeCommit Repo
+## Diagram
+![diagram](/images/diagram.png)
 ## Instructions
 ### Deploy Pipeline with Terraform
 Before you deploy the terraform, please create a file called `terraform.tfvars` and set the value of the `artifact_bucket_name` variable to a globally unique name. I suggest that you use the following name with your own string of random numbers and letters:
