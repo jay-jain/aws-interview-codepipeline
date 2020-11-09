@@ -7,6 +7,7 @@ This repository uses Terraform to create the following components:
 * CodePipeline for CI/CD orchestration
 * IAM Policies / Roles for all components
 * EC2 instance with CodeDeploy agent installed
+* CloudWatch Event Rule to trigger pipeline on repo push
 
 The Terraform code outputs:
 * The public IP of the EC2 instance
